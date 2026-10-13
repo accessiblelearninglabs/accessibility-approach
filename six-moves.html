@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approach · How is it made · Accessible Learning Labs</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap" rel="stylesheet">
+<style>
+  :root{--paper:#fff;--ink:#43525a;--ink-strong:#303e44;--stone:#8a959b;--accent:#475f6a;--hair:#e2e6e8;--hair-soft:#eef1f2;--panel:#f7f8f9;}
+  *{box-sizing:border-box}
+  body{margin:0;font-family:'Asap',system-ui,sans-serif;color:var(--ink);background:var(--paper);line-height:1.6;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1080px;margin:0 auto;padding:8px 24px 24px 16px}
+  a{color:var(--accent);text-decoration:underline;text-underline-offset:.15em} a:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+  .top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 .6rem}
+  .eyebrow{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin:0}
+  .all{font:inherit;font-size:.8rem;letter-spacing:.06em;color:var(--accent);background:none;border:0;padding:0;cursor:pointer;text-decoration:underline;text-underline-offset:.15em}
+  .all:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+  .acc{border-top:1px solid var(--hair)}
+  .item{border-bottom:1px solid var(--hair)}
+  .hd{margin:0}
+  .trig{width:100%;display:grid;grid-template-columns:52px 1fr 24px;align-items:center;gap:0 18px;padding:16px 4px;background:none;border:0;cursor:pointer;font:inherit;color:var(--ink-strong);text-align:left}
+  .trig:focus-visible{outline:none} .trig:focus-visible .c{box-shadow:0 0 0 3px var(--paper),0 0 0 5px var(--accent)}
+  .c{width:52px;height:52px;border-radius:50%;border:1.5px solid var(--ink-strong);display:grid;place-items:center;font-size:.9rem;font-weight:600;transition:background .25s,color .25s}
+  .trig[aria-expanded="true"] .c,.trig:hover .c{background:var(--ink-strong);color:var(--paper)}
+  .ttl{display:flex;flex-direction:column;gap:2px}
+  .name{font-size:1.05rem;font-weight:600}
+  .q{font-size:.95rem;font-weight:300;font-style:italic;color:var(--ink)}
+  .chev{width:10px;height:10px;border-right:1.5px solid var(--ink-strong);border-bottom:1.5px solid var(--ink-strong);transform:rotate(45deg);transition:transform .25s;margin:0 auto -4px}
+  .trig[aria-expanded="true"] .chev{transform:rotate(-135deg);margin:4px auto 0}
+  .sec{background:var(--panel)}
+  .body{padding:6px 24px 22px 74px}
+  .body p{margin:0 0 .8rem;max-width:74ch}
+  .lab{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin:.9rem 0 .2rem}
+  .src{font-size:.86rem;color:var(--stone)}
+  @media (max-width:600px){.trig{grid-template-columns:44px 1fr 20px;gap:0 12px}.c{width:44px;height:44px}.body{padding:6px 16px 20px 16px}}
+  @media (prefers-reduced-motion:reduce){.c,.chev{transition:none}}
+  @media (forced-colors:active){.c{border-color:ButtonText}.trig[aria-expanded="true"] .c{background:Highlight;color:HighlightText;forced-color-adjust:none}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top">
+    <p class="eyebrow">Approach · How is it made</p>
+    <button type="button" class="all" id="all" aria-expanded="false">Expand all</button>
+  </div>
+  <div class="acc" id="acc">
+
+  <div class="item">
+    <h3 class="hd"><button type="button" class="trig" id="trig-listen" aria-expanded="false" aria-controls="sec-listen">
+      <span class="c">1</span>
+      <span class="ttl"><span class="name">Listen first</span><span class="q">What is the task, and where does it stop them?</span></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button></h3>
+    <div class="sec" id="sec-listen" role="region" aria-labelledby="trig-listen" hidden>
+      <div class="body">
+        <p class="lab">What happens</p><p>The learner describes the course, the assessment, the placement or the lab in front of them, and the specific place where the way it is currently done stops them. What can be shared, with whom, and for how long is agreed here, before anything is written down. Documentation is read afterwards, for functional impact in this environment, and the request for it is limited to what the decision needs — a letter that confirms function is often enough, and a diagnosis is often not required. If a need is already clear, an interim arrangement goes in place at this move.</p>
+        <p class="lab">What it prevents</p><p>A diagnosis standing in for a person; a term lost while paperwork is pending.</p>
+        <p class="src">Held by the learner.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3 class="hd"><button type="button" class="trig" id="trig-essential" aria-expanded="false" aria-controls="sec-essential">
+      <span class="c">2</span>
+      <span class="ttl"><span class="name">Establish what is essential</span><span class="q">What must they still demonstrate, and who says so?</span></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button></h3>
+    <div class="sec" id="sec-essential" role="region" aria-labelledby="trig-essential" hidden>
+      <div class="body">
+        <p class="lab">What happens</p><p>With the people who teach it: what must a learner be able to demonstrate, and which parts of the current method are tradition, timetable or default. The question is put the way the law puts it — rationally connected to the outcome, held in good faith, reasonably necessary — and the answer is written and confirmed by the program, because it is theirs to hold and theirs to defend. Where a program has never written its essential requirements down, this move produces the first draft, and that draft outlives the case.</p>
+        <p class="lab">What it prevents</p><p>"We have always done it this way" standing as a requirement; the burden of proof landing on the learner.</p>
+        <p class="src">Held by the program.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3 class="hd"><button type="button" class="trig" id="trig-options" aria-expanded="false" aria-controls="sec-options">
+      <span class="c">3</span>
+      <span class="ttl"><span class="name">Design the options</span><span class="q">What could change for everyone, and what for this person?</span></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button></h3>
+    <div class="sec" id="sec-options" role="region" aria-labelledby="trig-options" hidden>
+      <div class="body">
+        <p class="lab">What happens</p><p>From the environment outward. First, what could change for everyone — a format, a setting, a way of showing the same thing — because a change at that level removes the next request as well as this one. Then what this person needs in this environment that the environment cannot yet supply. Each option is checked against the construct being assessed, so that an accommodation stays an accommodation. More than one route where more than one works; where only one works and it carries a real cost, the cost is quantified and external funding is looked for before anyone says the word hardship.</p>
+        <p class="lab">What it prevents</p><p>The same request arriving next term; a modification passed off as an accommodation; hardship claimed on a guess.</p>
+        <p class="src">Held by the practitioner, with the program.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3 class="hd"><button type="button" class="trig" id="trig-decide" aria-expanded="false" aria-controls="sec-decide">
+      <span class="c">4</span>
+      <span class="ttl"><span class="name">Decide at a gate, with the learner</span><span class="q">Which option, and on what terms?</span></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button></h3>
+    <div class="sec" id="sec-decide" role="region" aria-labelledby="trig-decide" hidden>
+      <div class="body">
+        <p class="lab">What happens</p><p>The learner sees the options, asks what they need to ask, and chooses. The decision, its reasons, its scope and its limits go into one document in plain language, with the route for asking that it be reviewed and by whom. It does not proceed until the learner has read it.</p>
+        <p class="lab">What it prevents</p><p>An arrangement nobody chose and nobody uses; a decision whose reasons left with the person who made it.</p>
+        <p class="src">Held by the learner.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3 class="hd"><button type="button" class="trig" id="trig-place" aria-expanded="false" aria-controls="sec-place">
+      <span class="c">5</span>
+      <span class="ttl"><span class="name">Put it in place and check it</span><span class="q">Who does what by when, and when do we look again?</span></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button></h3>
+    <div class="sec" id="sec-place" role="region" aria-labelledby="trig-place" hidden>
+      <div class="body">
+        <p class="lab">What happens</p><p>Each party has a task and a date. In a university that means the registrar, the exam centre, the teaching assistant, the placement coordinator, the residence office and the supervisor as well as the instructor — an arrangement is real only once it has survived all of them, and the record names who holds each piece. The check happens at a set point in the term, before the first assessment the decision affects, and what it finds changes the arrangement while the change can still reach the person already in the course.</p>
+        <p class="lab">What it prevents</p><p>An arrangement that exists on paper; a problem found after the grade is in.</p>
+        <p class="src">Held by everyone named in the record.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="item">
+    <h3 class="hd"><button type="button" class="trig" id="trig-pattern" aria-expanded="false" aria-controls="sec-pattern">
+      <span class="c">6</span>
+      <span class="ttl"><span class="name">Record the pattern</span><span class="q">What does this case say about the next one?</span></span>
+      <span class="chev" aria-hidden="true"></span>
+    </button></h3>
+    <div class="sec" id="sec-pattern" role="region" aria-labelledby="trig-pattern" hidden>
+      <div class="body">
+        <p class="lab">What happens</p><p>Each decision is a written record that can be read by anyone who needs it and by no one who does not. Read across cases, with identifying detail removed, the records show which barriers recur — and a barrier that recurs across four courses is a design question for the program, not four accommodations. It becomes a consultation with the department, a proposal to the body that governs curriculum, or a line in the institution's accessibility plan. That is where <a href="https://www.accessiblelearninglabs.com/fieldwork">Fieldwork</a> and the three <a href="https://www.accessiblelearninglabs.com/engagements">engagements</a> begin.</p>
+        <p class="lab">What it prevents</p><p>Four accommodations where one design change would do; a service that is busy forever.</p>
+        <p class="src">Held by the practitioner, and handed to the institution.</p>
+      </div>
+    </div>
+  </div>
+
+  </div>
+</div>
+<script>
+(function(){
+  const trigs=[...document.querySelectorAll('.trig')], all=document.getElementById('all');
+  function setOpen(t,open){ t.setAttribute('aria-expanded',open?'true':'false'); document.getElementById(t.getAttribute('aria-controls')).hidden=!open; syncAll(); }
+  function syncAll(){ const every=trigs.every(t=>t.getAttribute('aria-expanded')==='true'); all.textContent=every?'Collapse all':'Expand all'; all.setAttribute('aria-expanded',every?'true':'false'); }
+  trigs.forEach((t,i)=>{
+    t.addEventListener('click',()=>setOpen(t,t.getAttribute('aria-expanded')!=='true'));
+    t.addEventListener('keydown',e=>{
+      let j=null;
+      if(e.key==='ArrowDown') j=(i+1)%trigs.length; else if(e.key==='ArrowUp') j=(i-1+trigs.length)%trigs.length;
+      else if(e.key==='Home') j=0; else if(e.key==='End') j=trigs.length-1;
+      if(j!==null){ e.preventDefault(); trigs[j].focus(); }
+    });
+  });
+  all.addEventListener('click',()=>{ const open=all.getAttribute('aria-expanded')!=='true'; trigs.forEach(t=>setOpen(t,open)); });
+  if(location.hash){ const t=document.querySelector('[aria-controls="'+location.hash.slice(1)+'"]'); if(t){ setOpen(t,true); t.focus(); } }
+})();
+
+/* Report height to the parent page so an embed can resize with the accordion. */
+(function(){
+  function post(){
+    var d=document.documentElement, b=document.body;
+    var hgt=Math.max(b.scrollHeight,b.offsetHeight,d.scrollHeight,d.offsetHeight);
+    try{ parent.postMessage({sixMovesHeight:hgt},'*'); }catch(e){}
+  }
+  window.addEventListener('load',post);
+  window.addEventListener('resize',post);
+  document.addEventListener('click',function(){ setTimeout(post,60); });
+  document.addEventListener('keyup',function(){ setTimeout(post,60); });
+  if(window.ResizeObserver){ new ResizeObserver(post).observe(document.body); }
+  setTimeout(post,150);
+})();
+</script>
+</body>
+</html>
