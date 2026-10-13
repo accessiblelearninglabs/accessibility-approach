@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Approach · The six moves as a map · Accessible Learning Labs</title>
+<meta name="description" content="How the six moves of an access decision connect: what each one changes for the learner, the institution and the system of learning, and the sources each rests on.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#ffffff; --sunk:#f7f8f9; --panel:#ffffff;
+  --ink:#43525a; --ink-strong:#303e44; --muted:#576a73; --stone:#66747b;
+  --hair:#d5dde1; --hair-soft:#eef1f2; --edge:#7b8990; --focus:#303e44;
+  --sans:"Asap",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --ease:cubic-bezier(.22,.61,.36,1);
+}
+*{box-sizing:border-box;}
+body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:1.0625rem;line-height:1.6;-webkit-font-smoothing:antialiased;}
+button{font:inherit;color:inherit;}
+h2,h3{color:var(--ink-strong);line-height:1.25;font-weight:600;margin:0;}
+p{margin:0 0 .8em;}
+a{color:var(--ink-strong);text-underline-offset:3px;text-decoration-thickness:1px;}
+:focus-visible{outline:3px solid var(--focus);outline-offset:2px;border-radius:3px;}
+.sr{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0;}
+.wrap{max-width:1080px;margin:0 auto;padding:8px 24px 24px 16px;}
+.top{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:0 0 .4rem;}
+.eyebrow{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin:0;}
+.plain{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;background:none;border:0;cursor:pointer;font-size:.86rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;}
+.plain:hover{color:var(--ink-strong);}
+.lede{font-size:.95rem;color:var(--muted);max-width:70ch;margin:0 0 1rem;}
+.stage{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1px;background:var(--hair-soft);border:1px solid var(--hair-soft);border-radius:8px;overflow:hidden;}
+.cwrap{position:relative;background:var(--paper);min-width:0;padding:10px;}
+svg{display:block;width:100%;height:auto;touch-action:none;}
+.hint{position:absolute;left:14px;bottom:10px;font-size:.76rem;color:var(--stone);background:rgba(255,255,255,.9);padding:3px 8px;border-radius:4px;pointer-events:none;}
+.side{background:var(--panel);padding:18px 20px 22px;min-width:0;overflow-y:auto;max-height:560px;}
+.side-empty{color:var(--muted);font-size:.94rem;}
+.p-g{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--g,var(--ink-strong));margin:0 0 6px;}
+.p-t{font-size:1.1rem;margin:0 0 3px;}
+.p-s{color:var(--muted);font-size:.93rem;font-style:italic;margin:0 0 10px;}
+.p-b{font-size:.94rem;margin:0 0 10px;}
+.p-l{font-size:10px;letter-spacing:.13em;text-transform:uppercase;font-weight:600;color:var(--stone);margin:12px 0 3px;}
+.p-v{font-size:.9rem;margin:0 0 4px;}
+.p-v a{color:var(--ink);}
+.lv{display:grid;grid-template-columns:auto 1fr;gap:2px 10px;font-size:.9rem;margin:0;}
+.lv dt{color:var(--stone);font-weight:600;}
+.lv dd{margin:0;}
+.chips{display:flex;flex-direction:column;gap:5px;margin:0;}
+.chip-go{display:flex;align-items:flex-start;gap:8px;min-height:44px;padding:6px 11px;border:1px solid var(--hair);border-radius:8px;background:var(--paper);cursor:pointer;font-size:.86rem;line-height:1.35;color:var(--ink);text-align:left;transition:background .18s var(--ease);}
+.chip-go:hover{background:var(--sunk);}
+.chip-go .cd{width:9px;height:9px;border-radius:100px;background:var(--sw);flex-shrink:0;display:inline-block;margin-top:.45em;}
+.chip-go .why{color:var(--muted);display:block;}
+.tt{position:absolute;pointer-events:none;opacity:0;transform:translateY(-3px);transition:opacity .14s var(--ease);background:var(--ink-strong);color:#fff;border-radius:4px;padding:6px 10px;max-width:240px;z-index:5;font-size:12.5px;line-height:1.35;}
+.tt.show{opacity:1;transform:translateY(0);}
+.tt .k{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;opacity:.72;margin-bottom:2px;}
+.legend{display:flex;flex-wrap:wrap;gap:8px 22px;padding:12px 0 0;font-size:.82rem;color:var(--muted);}
+.legend span{display:inline-flex;align-items:center;gap:7px;}
+.ln{width:26px;height:0;border-top:2px solid var(--edge);display:inline-block;}
+.ln.dash{border-top-style:dashed;}
+.dot{width:10px;height:10px;border-radius:100px;background:var(--sw);flex-shrink:0;display:inline-block;}
+/* svg */
+.e{stroke:#303e44;stroke-width:1.4;fill:none;opacity:.18;transition:opacity .2s var(--ease);pointer-events:none;}
+.e.dash{stroke-dasharray:5 5;}
+.e.on{opacity:.75;}
+.e.off{opacity:.06;}
+.eh{stroke:transparent;stroke-width:14;fill:none;cursor:help;}
+.nd{cursor:grab;outline:none;}
+.nd.drag{cursor:grabbing;}
+.nd circle{stroke:#fff;stroke-width:2;transition:opacity .2s var(--ease),stroke .15s var(--ease);}
+.nd:hover circle,.nd.hover circle{stroke:#303e44;}
+.nd:focus-visible circle{stroke:#303e44;stroke-width:3;}
+.nd[aria-pressed="true"] circle{stroke:#303e44;stroke-width:3;}
+.nd text{fill:#fff;font-weight:700;font-size:15px;text-anchor:middle;dominant-baseline:central;pointer-events:none;}
+.nd .lb{fill:#303e44;font-weight:600;font-size:12.5px;dominant-baseline:central;pointer-events:none;}
+.nd.dim circle{opacity:.35;} .nd.dim .lb{opacity:.45;}
+.ringlb{fill:#66747b;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;text-anchor:middle;pointer-events:none;}
+@media (max-width:860px){.stage{grid-template-columns:1fr;}.side{max-height:none;}}
+@media (prefers-reduced-motion:reduce){*{transition-duration:.01ms !important;}}
+@media (prefers-contrast:more){:root{--hair:#5c6a71;--hair-soft:#9aa5ab;--muted:#3c4a52;--stone:#4a575e;}}
+@media (forced-colors:active){.dot,.chip-go .cd{forced-color-adjust:none;background:CanvasText;}.nd circle{forced-color-adjust:none;}.nd[aria-pressed="true"] circle,.nd:focus-visible circle{stroke:Highlight;}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <div class="top"><p class="eyebrow">Approach · The six moves as a map</p><button type="button" class="plain" id="reset">Reset layout</button></div>
+  <p class="lede">Six moves, in order, with the moves that feed back into earlier ones shown as dashed lines. Select a move to read what it changes for the learner, for the institution and for the system of learning, which moves it depends on and why, and the sources it rests on. Point at a line to read why the two moves are connected. Colour shows which group of the <a href="https://www.accessiblelearninglabs.com/landscape">landscape</a> each move draws on.</p>
+
+  <div class="stage">
+    <div class="cwrap">
+      <svg id="map" viewBox="0 0 760 500" role="group" aria-label="Map of the six moves. Each move is a button; arrow keys move between them, Enter or Space opens one.">
+        <text class="ringlb" x="380" y="250" dy="-4">The learner</text>
+        <text class="ringlb" x="380" y="250" dy="12">at the centre</text>
+        <g id="edges"></g>
+        <g id="hits"></g>
+        <g id="nodes"></g>
+      </svg>
+      <div class="tt" id="tt" aria-hidden="true"><div class="k" id="tt-k"></div><div id="tt-n"></div></div>
+      <p class="hint" id="hint">Select a move · drag to rearrange · point at a line to read why</p>
+    </div>
+    <div class="side" id="side" tabindex="-1">
+      <p class="side-empty">Select a circle on the map to open it here. Colour shows the landscape group the move draws on; a dashed line is a later move changing an earlier one.</p>
+    </div>
+    <p class="sr" id="side-status" role="status"></p>
+  </div>
+
+  <div class="legend" id="legend">
+    <span><span class="ln"></span>Sequence: one move leads to the next</span>
+    <span><span class="ln dash"></span>Feedback: a later move changes an earlier one</span>
+  </div>
+  <div class="legend" id="legend-moves"></div>
+  <p class="lede" style="margin-top:14px">A <a href="six-moves-map-linear.html">screen reader and keyboard-optimised version of this map</a> presents the same content in reading order.</p>
+</div>
+
+<script>
+(function(){
+var GC={grounding:"#477ba8",rights:"#567a9d",accommodations:"#347cb1",variability:"#617993",institutions:"#717781",services:"#303e44"};
+var GL={grounding:"Grounding",rights:"Rights and obligation",accommodations:"Accommodation in practice",variability:"Designing for variability",institutions:"Institutions, governance and change",services:"Services"};
+var GU={grounding:"grounding",rights:"rights",accommodations:"accommodations",variability:"designing-for-variability",institutions:"institutions-governance-and-change",services:"services"};
+var SRC={
+ 1:"Ontario Human Rights Commission (2018). Policy on accessible education for students with disabilities.",
+ 2:"Freedom of Information and Protection of Privacy Act, RSBC 1996, c 165.",
+ 3:"World Health Organization (2001). International Classification of Functioning, Disability and Health.",
+ 4:"Central Okanagan School District No. 23 v. Renaud, [1992] 2 S.C.R. 970.",
+ 5:"British Columbia (Public Service Employee Relations Commission) v. BCGSEU, [1999] 3 S.C.R. 3 (Meiorin).",
+ 6:"Moore v. British Columbia (Education), 2012 SCC 61.",
+ 7:"AERA, APA & NCME (2014). Standards for educational and psychological testing.",
+ 8:"CAST (2024). Universal Design for Learning Guidelines, version 3.0.",
+ 9:"Burgstahler, S. E. (Ed.) (2015). Universal design in higher education: From principles to practice (2nd ed.).",
+ 10:"Messick, S. (1995). Validity of psychological assessment. American Psychologist, 50(9), 741–749.",
+ 11:"Lyman, M., et al. (2016). What keeps students with disabilities from using accommodations in postsecondary education? Journal of Postsecondary Education and Disability, 29(2), 123–140.",
+ 12:"Ryan, R. M., & Deci, E. L. (2000). Self-determination theory. American Psychologist, 55(1), 68–78.",
+ 13:"Charlton, J. I. (1998). Nothing about us without us. University of California Press.",
+ 14:"Sins Invalid (2019). Skin, tooth, and bone: The basis of movement is our people (2nd ed.).",
+ 15:"University Act, RSBC 1996, c 468.",
+ 16:"Accessible British Columbia Act, SBC 2021, c 19.",
+ 17:"Oliver, M. (1990). The politics of disablement. Macmillan.",
+ 18:"Human Rights Code, RSBC 1996, c 210."
+};
+var N=[
+ {id:"listen",num:1,g:"accommodations",name:"Listen first",q:"What is the task, and where does it stop them?",held:"Held by the learner",
+  what:"The learner describes the task and where it stops them. What can be shared, with whom and for how long is agreed before anything is written. Documentation is read afterwards, for functional impact in this environment, and requested only to the extent the decision needs. If a need is already clear, an interim arrangement goes in place.",
+  learner:"Is believed first and examined second; controls what is shared about them.",
+  inst:"Meets its duty to inquire and its procedural duty from the first contact, and collects only what it is entitled to hold.",
+  sys:"Barriers are recorded as task-and-setting mismatches from the outset, which is the form a design question takes.",
+  record:"The learner's account of the task and barrier; the consent note; any interim arrangement.",
+  ground:"Duty to inquire, procedural duty and interim accommodation (OHRC); shared responsibility of every party to the process (Renaud); purpose-limited collection (FIPPA); function rather than diagnosis (ICF).",
+  srcs:[1,4,2,3],
+  to:[{id:"essential",why:"The account of the task is what the program's essential-requirements question is asked about."},{id:"decide",why:"The constraints agreed here on sharing govern what the decision document may say."}]},
+ {id:"essential",num:2,g:"rights",name:"Establish what is essential",q:"What must they still demonstrate, and who says so?",held:"Held by the program",
+  what:"With the people who teach it: what must a learner demonstrate, and which parts of the current method are tradition, timetable or default. The question is put as the law puts it — rationally connected, held in good faith, reasonably necessary — and the answer is written and confirmed by the program. Where none existed, this move produces the program's first statement of essential requirements.",
+  learner:"Is not asked to prove that a requirement is unnecessary; the institution carries that burden.",
+  inst:"Holds a written, defensible statement of what each course requires, made before any dispute rather than during one.",
+  sys:"The distinction between what an assessment measures and how it is habitually done becomes explicit, course by course.",
+  record:"The program's confirmed statement of essential requirements, with reasons.",
+  ground:"The three-part test and the burden on the institution (Meiorin); education itself as the service (Moore); bona fide academic requirements (OHRC); construct and modification (AERA/APA/NCME).",
+  srcs:[5,6,1,7],
+  to:[{id:"options",why:"Options are designed only inside the space the essential requirements leave open."}]},
+ {id:"options",num:3,g:"variability",name:"Design the options",q:"What could change for everyone, and what for this person?",held:"Held by the practitioner, with the program",
+  what:"From the environment outward: first what could change for everyone, then what this person needs that the environment cannot yet supply. Each option is checked against the construct being assessed so that an accommodation stays an accommodation. More than one route where more than one works; where a real cost arises, it is quantified and external funding is looked for before hardship is raised.",
+  learner:"Receives options that fit the environment they are in, not a standard package.",
+  inst:"Resolves at the design level what it can, and raises hardship only on evidence, as the law requires.",
+  sys:"Every individual request is first read as a possible design change, which is how the number of requests falls over time.",
+  record:"The options considered, including those set aside and why.",
+  ground:"Design for the range before the request (CAST; Burgstahler); accommodation versus modification by construct (Messick; AERA/APA/NCME); hardship on evidence, not impression (Renaud).",
+  srcs:[8,9,10,7,4],
+  to:[{id:"decide",why:"The options are what the learner chooses among."}]},
+ {id:"decide",num:4,g:"grounding",name:"Decide at a gate, with the learner",q:"Which option, and on what terms?",held:"Held by the learner",
+  what:"The learner sees the options, asks what they need to ask, and chooses. The decision, its reasons, its scope and its limits go into one plain-language document, with the route for asking that it be reviewed and by whom. It does not proceed until the learner has read it.",
+  learner:"Holds the choice, and a document they can carry and read on the day they need it.",
+  inst:"Has a decision whose reasoning survives the people who made it and can be reviewed.",
+  sys:"Choice is treated as part of the design, because an arrangement the learner did not choose is one they are less likely to use.",
+  record:"The decision document: arrangement, reasons, scope, limits, review route.",
+  ground:"Learners' reasons for leaving accommodations unused (Lyman et al.); autonomy and motivation (Ryan & Deci); the choice belongs to the person (Charlton; Sins Invalid).",
+  srcs:[11,12,13,14],
+  to:[{id:"place",why:"The decision assigns the tasks and dates that move 5 carries out."}]},
+ {id:"place",num:5,g:"institutions",name:"Put it in place and check it",q:"Who does what by when, and when do we look again?",held:"Held by everyone named in the record",
+  what:"Each party has a task and a date — registrar, exam centre, teaching assistant, placement coordinator, residence office, supervisor, instructor — and the record names who holds each piece. The check happens at a set point in the term, before the first assessment the decision affects, and what it finds changes the arrangement while the change can still reach the person in the course.",
+  learner:"Can expect the arrangement to be in place on the day, and to be asked whether it was.",
+  inst:"Knows which office holds each obligation, and finds failures before a grade is in rather than after.",
+  sys:"Implementation is observed, not assumed, which is the evidence base for every later change.",
+  record:"The implementation record and the check note.",
+  ground:"The senate and academic council as the bodies that hold academic standards (University Act); monitoring and adjustment of accommodations (OHRC).",
+  srcs:[15,1],
+  to:[{id:"decide",why:"What the check finds can change the decision while the term is still running.",back:true},{id:"pattern",why:"Each completed, checked decision is one entry in the pattern."}]},
+ {id:"pattern",num:6,g:"services",name:"Record the pattern",q:"What does this case say about the next one?",held:"Held by the practitioner, handed to the institution",
+  what:"Each decision is a record readable by those who need it and by no one else. Read across cases, with identifying detail removed, the records show which barriers recur. A barrier that recurs across four courses is a design question for the program: a consultation with the department, a proposal to the body that governs curriculum, or a line in the institution's accessibility plan. That is where Fieldwork and the three engagements begin.",
+  learner:"Is not the only person to benefit from their own case; the next learner meets a lower barrier.",
+  inst:"Turns its casework into evidence for its accessibility plan and its curriculum governance.",
+  sys:"The barrier is relocated from the person to the environment, which is where the social model says it was.",
+  record:"The anonymised pattern log; the proposal or plan entry it produces.",
+  ground:"Records held for their stated purpose (FIPPA); the institution's accessibility plan (Accessible BC Act); the barrier is in the environment (Oliver); design for the range (CAST).",
+  srcs:[2,16,17,8],
+  to:[{id:"essential",why:"A recurring barrier reopens the program's statement of what is essential.",back:true},{id:"options",why:"A recurring barrier becomes a design change for everyone, not an option for one.",back:true}]}
+];
+var MAP={}; N.forEach(function(n){MAP[n.id]=n;});
+var cx=380,cy=250,R=172,TWO=Math.PI*2;
+function home(){N.forEach(function(n,i){var a=-Math.PI/2+i*TWO/N.length;n.x=cx+Math.cos(a)*R;n.y=cy+Math.sin(a)*R;});}
+home();
+var svgNS="http://www.w3.org/2000/svg",svg=document.getElementById("map");
+function el(t,at){var e=document.createElementNS(svgNS,t);for(var k in at)e.setAttribute(k,at[k]);return e;}
+var E=[],EG=document.getElementById("edges"),HG=document.getElementById("hits"),NG=document.getElementById("nodes");
+var tt=document.getElementById("tt"),ttK=document.getElementById("tt-k"),ttN=document.getElementById("tt-n"),cwrap=document.querySelector(".cwrap");
+var reduce=window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+/* edges: a visible path and an invisible wider path for pointer hit-testing */
+N.forEach(function(n){n.to.forEach(function(t){
+  var e={a:n,b:MAP[t.id],back:!!t.back,why:t.why};
+  e.p=el("path",{"class":"e"+(e.back?" dash":"")});EG.appendChild(e.p);
+  e.h=el("path",{"class":"eh"});HG.appendChild(e.h);
+  e.h.addEventListener("pointermove",function(ev){tip(ev,(e.back?"Feedback · ":"Sequence · ")+e.a.num+" to "+e.b.num,e.why);});
+  e.h.addEventListener("pointerleave",hideTip);
+  E.push(e);
+});});
+function edgeD(e){
+  var a=e.a,b=e.b,dx=b.x-a.x,dy=b.y-a.y,mx=(a.x+b.x)/2,my=(a.y+b.y)/2;
+  var vx=mx-cx,vy=my-cy,l=Math.hypot(vx,vy)||1,k=e.back?-0.55:0.18,d=Math.hypot(dx,dy);
+  var qx=mx+vx/l*k*d*0.5,qy=my+vy/l*k*d*0.5;
+  return "M"+a.x+","+a.y+" Q"+qx+","+qy+" "+b.x+","+b.y;
+}
+function drawEdges(){E.forEach(function(e){var d=edgeD(e);e.p.setAttribute("d",d);e.h.setAttribute("d",d);});}
+
+/* nodes: real focusable controls inside the SVG */
+N.forEach(function(n,i){
+  var g=el("g",{"class":"nd",role:"button",tabindex:i===0?"0":"-1","aria-pressed":"false","aria-label":"Move "+n.num+": "+n.name+". "+n.held+"."});
+  g.dataset.id=n.id;
+  n.c=el("circle",{r:26,fill:GC[n.g]});g.appendChild(n.c);
+  n.t=el("text");n.t.textContent=n.num;g.appendChild(n.t);
+  var words=n.name.split(" "),lines=[],cur="";
+  words.forEach(function(w){if((cur+" "+w).trim().length>20){lines.push(cur.trim());cur=w;}else cur+=" "+w;});lines.push(cur.trim());
+  n.lb=lines.map(function(s){var l=el("text",{"class":"lb"});l.textContent=s;g.appendChild(l);return l;});
+  n.g_=g;
+  g.addEventListener("click",function(){if(!n.moved)select(n.id);});
+  g.addEventListener("keydown",function(ev){
+    var j=null;
+    if(ev.key==="Enter"||ev.key===" "){ev.preventDefault();select(n.id);return;}
+    if(ev.key==="ArrowRight"||ev.key==="ArrowDown")j=(i+1)%N.length;
+    else if(ev.key==="ArrowLeft"||ev.key==="ArrowUp")j=(i-1+N.length)%N.length;
+    else if(ev.key==="Home")j=0;else if(ev.key==="End")j=N.length-1;
+    if(j!==null){ev.preventDefault();N[j].g_.focus();}
+  });
+  g.addEventListener("focus",function(){roving(i);});
+  g.addEventListener("pointerenter",function(){g.classList.add("hover");hiliteEdges(n.id,true);});
+  g.addEventListener("pointerleave",function(){g.classList.remove("hover");hiliteEdges(sel,false);hideTip();});
+  g.addEventListener("pointermove",function(ev){if(!drag)tip(ev,GL[n.g],n.num+" · "+n.name+" — "+n.q);});
+  /* drag */
+  g.addEventListener("pointerdown",function(ev){
+    var p=pt(ev);drag={n:n,ox:p.x-n.x,oy:p.y-n.y,sx:ev.clientX,sy:ev.clientY};n.moved=false;
+    g.setPointerCapture(ev.pointerId);g.classList.add("drag");hideTip();
+  });
+  g.addEventListener("pointermove",function(ev){
+    if(!drag||drag.n!==n)return;
+    if(Math.abs(ev.clientX-drag.sx)+Math.abs(ev.clientY-drag.sy)>4)n.moved=true;
+    var p=pt(ev);n.x=Math.max(40,Math.min(720,p.x-drag.ox));n.y=Math.max(30,Math.min(470,p.y-drag.oy));place(n);drawEdges();
+  });
+  function endDrag(){if(drag&&drag.n===n){drag=null;g.classList.remove("drag");}}
+  g.addEventListener("pointerup",endDrag);g.addEventListener("pointercancel",endDrag);
+  NG.appendChild(g);
+});
+var drag=null;
+function pt(ev){var m=svg.getScreenCTM(),p=svg.createSVGPoint();p.x=ev.clientX;p.y=ev.clientY;var q=p.matrixTransform(m.inverse());return {x:q.x,y:q.y};}
+function roving(i){N.forEach(function(m,j){m.g_.setAttribute("tabindex",j===i?"0":"-1");});}
+function place(n){
+  n.c.setAttribute("cx",n.x);n.c.setAttribute("cy",n.y);n.t.setAttribute("x",n.x);n.t.setAttribute("y",n.y);
+  var a=Math.atan2(n.y-cy,n.x-cx),c=Math.cos(a),s=Math.sin(a);
+  var anchor=Math.abs(c)<0.3?"middle":(c>0?"start":"end");
+  var lx=n.x+c*36,ly=n.y+s*36,k=n.lb.length;
+  n.lb.forEach(function(l,i){l.setAttribute("x",lx);l.setAttribute("y",ly+(i-(k-1)/2)*15);l.setAttribute("style","text-anchor:"+anchor);});
+}
+function layout(animate){
+  if(!animate||reduce){N.forEach(place);drawEdges();return;}
+  var from=N.map(function(n){return {x:n.cx_||n.x,y:n.cy_||n.y};});
+  var t0=null;
+  function step(ts){if(!t0)t0=ts;var k=Math.min(1,(ts-t0)/320);k=1-Math.pow(1-k,3);
+    N.forEach(function(n,i){n.x=from[i].x+(n.hx-from[i].x)*k;n.y=from[i].y+(n.hy-from[i].y)*k;place(n);});drawEdges();
+    if(k<1)requestAnimationFrame(step);}
+  requestAnimationFrame(step);
+}
+N.forEach(place);drawEdges();
+
+/* tooltip */
+function tip(ev,k,n){var r=cwrap.getBoundingClientRect();ttK.textContent=k;ttN.textContent=n;
+  tt.style.left=Math.min(ev.clientX-r.left+14,r.width-250)+"px";tt.style.top=Math.max(4,ev.clientY-r.top-8)+"px";tt.classList.add("show");}
+function hideTip(){tt.classList.remove("show");}
+
+/* selection */
+var side=document.getElementById("side"),status=document.getElementById("side-status"),sel=null;
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c];});}
+function linked(a,b){return MAP[a].to.some(function(t){return t.id===b;})||MAP[b].to.some(function(t){return t.id===a;});}
+function hiliteEdges(id,hover){
+  E.forEach(function(e){e.p.classList.remove("on","off");if(!id)return;e.p.classList.add((e.a.id===id||e.b.id===id)?"on":"off");});
+  N.forEach(function(m){m.g_.classList.toggle("dim",!!id&&m.id!==id&&!linked(id,m.id));});
+}
+function select(id){
+  sel=id;var n=MAP[id];
+  N.forEach(function(m){m.g_.setAttribute("aria-pressed",m.id===id?"true":"false");});
+  hiliteEdges(id,false);
+  var from=N.filter(function(m){return m.to.some(function(t){return t.id===id;});});
+  var h='<p class="p-g" style="--g:'+GC[n.g]+'">Move '+n.num+' of 6 · '+esc(n.held)+'</p>'
+   +'<h3 class="p-t">'+esc(n.name)+'</h3><p class="p-s">'+esc(n.q)+'</p>'
+   +'<p class="p-l">What happens</p><p class="p-b">'+esc(n.what)+'</p>'
+   +'<p class="p-l">What it changes</p><dl class="lv"><dt>Learner</dt><dd>'+esc(n.learner)+'</dd><dt>Institution</dt><dd>'+esc(n.inst)+'</dd><dt>System</dt><dd>'+esc(n.sys)+'</dd></dl>'
+   +'<p class="p-l">Record it produces</p><p class="p-v">'+esc(n.record)+'</p>';
+  if(n.to.length){h+='<p class="p-l">Leads to</p><div class="chips">'+n.to.map(function(t){var m=MAP[t.id];return '<button type="button" class="chip-go" data-go="'+m.id+'"><span class="cd" style="--sw:'+GC[m.g]+'"></span><span>'+esc(m.num+" · "+m.name)+(t.back?" (feedback)":"")+'<span class="why">'+esc(t.why)+'</span></span></button>';}).join("")+'</div>';}
+  if(from.length){h+='<p class="p-l">Depends on</p><div class="chips">'+from.map(function(m){var t=m.to.filter(function(x){return x.id===id;})[0];return '<button type="button" class="chip-go" data-go="'+m.id+'"><span class="cd" style="--sw:'+GC[m.g]+'"></span><span>'+esc(m.num+" · "+m.name)+(t.back?" (feedback)":"")+'<span class="why">'+esc(t.why)+'</span></span></button>';}).join("")+'</div>';}
+  h+='<p class="p-l">Grounded in</p><p class="p-v">'+esc(n.ground)+'</p>'
+   +'<p class="p-l">Sources</p><ol class="p-v" style="padding-left:1.2em">'+n.srcs.map(function(s){return '<li value="'+s+'">'+esc(SRC[s])+'</li>';}).join("")+'</ol>'
+   +'<p class="p-l">Draws on the landscape group</p><p class="p-v"><a href="https://www.accessiblelearninglabs.com/'+GU[n.g]+'">'+esc(GL[n.g])+'</a></p>';
+  side.innerHTML=h;
+  status.textContent="Selected: move "+n.num+", "+n.name+". Details follow in the panel.";
+  post();
+}
+side.addEventListener("click",function(ev){var b=ev.target.closest?ev.target.closest("[data-go]"):null;if(b){select(b.dataset.go);MAP[b.dataset.go].g_.focus();}});
+document.getElementById("reset").addEventListener("click",function(){
+  N.forEach(function(n){n.cx_=n.x;n.cy_=n.y;});home();N.forEach(function(n){n.hx=n.x;n.hy=n.y;});layout(true);
+});
+
+/* legend of moves, non-interactive */
+document.getElementById("legend-moves").innerHTML=N.map(function(n){return '<span><span class="dot" style="--sw:'+GC[n.g]+'"></span>'+n.num+" · "+esc(n.name)+' · <a href="https://www.accessiblelearninglabs.com/'+GU[n.g]+'">'+esc(GL[n.g])+'</a></span>';}).join("");
+
+if(location.hash&&MAP[location.hash.slice(1)])select(location.hash.slice(1));
+function post(){var d=document.documentElement,b=document.body;var hgt=Math.max(b.scrollHeight,b.offsetHeight,d.scrollHeight,d.offsetHeight);try{parent.postMessage({sixMovesMapHeight:hgt},"*");}catch(e){}}
+window.addEventListener("load",post);window.addEventListener("resize",post);
+if(window.ResizeObserver){new ResizeObserver(post).observe(document.body);}
+setTimeout(post,150);
+})();
+</script>
+</body>
+</html>
