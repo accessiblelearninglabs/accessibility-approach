@@ -29,12 +29,12 @@ a{color:var(--ink-strong);text-underline-offset:3px;text-decoration-thickness:1p
 .eyebrow{font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);margin:0;}
 .plain{display:inline-flex;align-items:center;min-height:44px;padding:0 6px;background:none;border:0;cursor:pointer;font-size:.86rem;color:var(--muted);text-decoration:underline;text-underline-offset:3px;}
 .plain:hover{color:var(--ink-strong);}
-.lede{font-size:.95rem;color:var(--muted);max-width:70ch;margin:0 0 1rem;}
+.lede{font-size:.95rem;color:var(--muted);max-width:70ch;margin:0 0 1.4rem;}
 .stage{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:1px;background:var(--hair-soft);border:1px solid var(--hair-soft);border-radius:8px;overflow:hidden;}
-.cwrap{position:relative;background:var(--paper);min-width:0;padding:10px;}
+.cwrap{position:relative;background:var(--paper);min-width:0;padding:22px 26px 8px;display:flex;flex-direction:column;}
 svg{display:block;width:100%;height:auto;touch-action:none;}
-.hint{position:absolute;left:14px;bottom:10px;font-size:.76rem;color:var(--stone);background:rgba(255,255,255,.9);padding:3px 8px;border-radius:4px;pointer-events:none;}
-.side{background:var(--panel);padding:18px 20px 22px;min-width:0;overflow-y:auto;max-height:560px;}
+.hint{font-size:.78rem;color:var(--stone);margin:6px 0 4px;text-align:center;}
+.side{background:var(--panel);padding:22px 24px 26px;min-width:0;overflow-y:auto;max-height:640px;}
 .side-empty{color:var(--muted);font-size:.94rem;}
 .p-g{font-size:10px;letter-spacing:.14em;text-transform:uppercase;font-weight:700;color:var(--g,var(--ink-strong));margin:0 0 6px;}
 .p-t{font-size:1.1rem;margin:0 0 3px;}
@@ -54,7 +54,7 @@ svg{display:block;width:100%;height:auto;touch-action:none;}
 .tt{position:absolute;pointer-events:none;opacity:0;transform:translateY(-3px);transition:opacity .14s var(--ease);background:var(--ink-strong);color:#fff;border-radius:4px;padding:6px 10px;max-width:240px;z-index:5;font-size:12.5px;line-height:1.35;}
 .tt.show{opacity:1;transform:translateY(0);}
 .tt .k{font-size:9.5px;letter-spacing:.13em;text-transform:uppercase;font-weight:700;opacity:.72;margin-bottom:2px;}
-.legend{display:flex;flex-wrap:wrap;gap:8px 22px;padding:12px 0 0;font-size:.82rem;color:var(--muted);}
+.legend{display:flex;flex-wrap:wrap;gap:12px 28px;padding:18px 0 0;font-size:.84rem;color:var(--muted);line-height:1.5;}
 .legend span{display:inline-flex;align-items:center;gap:7px;}
 .ln{width:26px;height:0;border-top:2px solid var(--edge);display:inline-block;}
 .ln.dash{border-top-style:dashed;}
@@ -72,7 +72,7 @@ svg{display:block;width:100%;height:auto;touch-action:none;}
 .nd:focus-visible circle{stroke:#303e44;stroke-width:3;}
 .nd[aria-pressed="true"] circle{stroke:#303e44;stroke-width:3;}
 .nd text{fill:#fff;font-weight:700;font-size:15px;text-anchor:middle;dominant-baseline:central;pointer-events:none;}
-.nd .lb{fill:#303e44;font-weight:600;font-size:12.5px;dominant-baseline:central;pointer-events:none;}
+.nd .lb{fill:#303e44;font-weight:600;font-size:13px;dominant-baseline:central;pointer-events:none;}
 .nd.dim circle{opacity:.35;} .nd.dim .lb{opacity:.45;}
 .ringlb{fill:#66747b;font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;text-anchor:middle;pointer-events:none;}
 @media (max-width:860px){.stage{grid-template-columns:1fr;}.side{max-height:none;}}
@@ -88,9 +88,9 @@ svg{display:block;width:100%;height:auto;touch-action:none;}
 
   <div class="stage">
     <div class="cwrap">
-      <svg id="map" viewBox="0 0 760 500" role="group" aria-label="Map of the six moves. Each move is a button; arrow keys move between them, Enter or Space opens one.">
-        <text class="ringlb" x="380" y="250" dy="-4">The learner</text>
-        <text class="ringlb" x="380" y="250" dy="12">at the centre</text>
+      <svg id="map" viewBox="0 0 760 580" role="group" aria-label="Map of the six moves. Each move is a button; arrow keys move between them, Enter or Space opens one.">
+        <text class="ringlb" x="380" y="300" dy="-4">The learner</text>
+        <text class="ringlb" x="380" y="300" dy="12">at the centre</text>
         <g id="edges"></g>
         <g id="hits"></g>
         <g id="nodes"></g>
@@ -194,7 +194,7 @@ var N=[
   to:[{id:"essential",why:"A recurring barrier reopens the program's statement of what is essential.",back:true},{id:"options",why:"A recurring barrier becomes a design change for everyone, not an option for one.",back:true}]}
 ];
 var MAP={}; N.forEach(function(n){MAP[n.id]=n;});
-var cx=380,cy=250,R=172,TWO=Math.PI*2;
+var cx=380,cy=300,R=192,TWO=Math.PI*2;
 function home(){N.forEach(function(n,i){var a=-Math.PI/2+i*TWO/N.length;n.x=cx+Math.cos(a)*R;n.y=cy+Math.sin(a)*R;});}
 home();
 var svgNS="http://www.w3.org/2000/svg",svg=document.getElementById("map");
@@ -251,7 +251,7 @@ N.forEach(function(n,i){
   g.addEventListener("pointermove",function(ev){
     if(!drag||drag.n!==n)return;
     if(Math.abs(ev.clientX-drag.sx)+Math.abs(ev.clientY-drag.sy)>4)n.moved=true;
-    var p=pt(ev);n.x=Math.max(40,Math.min(720,p.x-drag.ox));n.y=Math.max(30,Math.min(470,p.y-drag.oy));place(n);drawEdges();
+    var p=pt(ev);n.x=Math.max(60,Math.min(700,p.x-drag.ox));n.y=Math.max(50,Math.min(530,p.y-drag.oy));place(n);drawEdges();
   });
   function endDrag(){if(drag&&drag.n===n){drag=null;g.classList.remove("drag");}}
   g.addEventListener("pointerup",endDrag);g.addEventListener("pointercancel",endDrag);
@@ -264,7 +264,7 @@ function place(n){
   n.c.setAttribute("cx",n.x);n.c.setAttribute("cy",n.y);n.t.setAttribute("x",n.x);n.t.setAttribute("y",n.y);
   var a=Math.atan2(n.y-cy,n.x-cx),c=Math.cos(a),s=Math.sin(a);
   var anchor=Math.abs(c)<0.3?"middle":(c>0?"start":"end");
-  var lx=n.x+c*36,ly=n.y+s*36,k=n.lb.length;
+  var lx=n.x+c*44,ly=n.y+s*44,k=n.lb.length;
   n.lb.forEach(function(l,i){l.setAttribute("x",lx);l.setAttribute("y",ly+(i-(k-1)/2)*15);l.setAttribute("style","text-anchor:"+anchor);});
 }
 function layout(animate){
