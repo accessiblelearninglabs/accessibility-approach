@@ -135,7 +135,8 @@ var SRC={
  15:"University Act, RSBC 1996, c 468.",
  16:"Accessible British Columbia Act, SBC 2021, c 19.",
  17:"Oliver, M. (1990). The politics of disablement. Macmillan.",
- 18:"Human Rights Code, RSBC 1996, c 210."
+ 18:"Human Rights Code, RSBC 1996, c 210.",
+ 19:"Newman, L., Wagner, M., Knokey, A.-M., et al. (2011). The post-high school outcomes of young adults with disabilities up to 8 years after high school: A report from the National Longitudinal Transition Study-2 (NCSER 2011-3005). SRI International."
 };
 var N=[
  {id:"listen",num:1,g:"accommodations",name:"Listen first",q:"What is the task, and where does it stop them?",held:"Held by the learner",
@@ -175,7 +176,7 @@ var N=[
   srcs:[11,12,13,14],
   to:[{id:"place",why:"The decision assigns the tasks and dates that move 5 carries out."}]},
  {id:"place",num:5,g:"institutions",name:"Put it in place and check it",q:"Who does what by when, and when do we look again?",held:"Held by everyone named in the record",
-  what:"Each party has a task and a date — registrar, exam centre, teaching assistant, placement coordinator, residence office, supervisor, instructor — and the record names who holds each piece. The check happens at a set point in the term, before the first assessment the decision affects, and what it finds changes the arrangement while the change can still reach the person in the course.",
+  what:"Each party has a task and a date — registrar, exam centre, teaching assistant, placement coordinator, residence office, supervisor, instructor — and the record names who holds each piece. The check happens at a set point in the term, before the first assessment the decision affects, and what it finds changes the arrangement while the change can still reach the person in the course. The check asks one question about the course as well: has anything built for this learner since been built in for everyone, so that the next learner does not have to ask?",
   learner:"Can expect the arrangement to be in place on the day, and to be asked whether it was.",
   inst:"Knows which office holds each obligation, and finds failures before a grade is in rather than after.",
   sys:"Implementation is observed, not assumed, which is the evidence base for every later change.",
@@ -184,13 +185,13 @@ var N=[
   srcs:[15,1],
   to:[{id:"decide",why:"What the check finds can change the decision while the term is still running.",back:true},{id:"pattern",why:"Each completed, checked decision is one entry in the pattern."}]},
  {id:"pattern",num:6,g:"services",name:"Record the pattern",q:"What does this case say about the next one?",held:"Held by the practitioner, handed to the institution",
-  what:"Each decision is a record readable by those who need it and by no one else. Read across cases, with identifying detail removed, the records show which barriers recur. A barrier that recurs across four courses is a design question for the program: a consultation with the department, a proposal to the body that governs curriculum, or a line in the institution's accessibility plan. That is where Fieldwork and the three engagements begin.",
+  what:"Each decision is a record readable by those who need it and by no one else. Read across cases, with identifying detail removed, the records show which barriers recur. A barrier that recurs across four courses is a design question for the program: a consultation with the department, a proposal to the body that governs curriculum, or a line in the institution's accessibility plan. The log also counts what the records cannot show on their own: whether requests of that kind fell once a barrier was designed out, and who never asked at all, since most learners who had support at school never ask again once they leave it. That is where Fieldwork and the three engagements begin.",
   learner:"Is not the only person to benefit from their own case; the next learner meets a lower barrier.",
   inst:"Turns its casework into evidence for its accessibility plan and its curriculum governance.",
   sys:"The barrier is relocated from the person to the environment, which is where the social model says it was.",
-  record:"The anonymised pattern log; the proposal or plan entry it produces.",
+  record:"The anonymised pattern log, with the count of requests avoided; the proposal or plan entry it produces.",
   ground:"Records held for their stated purpose (FIPPA); the institution's accessibility plan (Accessible BC Act); the barrier is in the environment (Oliver); design for the range (CAST).",
-  srcs:[2,16,17,8],
+  srcs:[2,16,17,8,19],
   to:[{id:"essential",why:"A recurring barrier reopens the program's statement of what is essential.",back:true},{id:"options",why:"A recurring barrier becomes a design change for everyone, not an option for one.",back:true}]}
 ];
 var MAP={}; N.forEach(function(n){MAP[n.id]=n;});
